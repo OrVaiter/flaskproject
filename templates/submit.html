@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>שליחת הודעה</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 2rem;
+    }
+    form {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>💬 שלח הודעה ל-Discord</h2>
+  <form id="messageForm">
+    <label>הקלד הודעה:</label>
+    <textarea id="text" rows="4" placeholder="כתוב כאן..." required></textarea>
+    <br>
+    <button type="submit">שלח</button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+    document.getElementById("messageForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const text = document.getElementById("text").value.trim();
+      const result = document.getElementById("result");
+      result.textContent = "שולח...";
+
+      const res = await fetch("/input_text", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: "MySecureToken123",
+          text: text
+        })
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        result.textContent = "✅ נשלח בהצלחה!";
+      } else {
+        result.textContent = "❌ שגיאה: " + (data.error || data.details);
+      }
+    });
+  </script>
+</body>
+</html>

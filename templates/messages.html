@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>📜 הודעות אחרונות</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f8fa;
+      margin: 0;
+      padding: 24px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    .message {
+      border-bottom: 1px solid #eee;
+      padding: 10px 0;
+    }
+    .timestamp {
+      color: #888;
+      font-size: 0.9em;
+    }
+    .text {
+      margin-top: 5px;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📨 הודעות מה־30 דקות האחרונות</h2>
+
+    {% if messages %}
+      {% for msg in messages %}
+        <div class="message">
+          <div class="timestamp">{{ msg.timestamp }}</div>
+          <div class="text">{{ msg.text }}</div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>אין הודעות מה־30 דקות האחרונות 😅</p>
+    {% endif %}
+  </div>
+</body>
+</html>
