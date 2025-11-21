@@ -20,11 +20,11 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@13.60.96.59 "
-            cd ~/project &&
-            git pull &&
-            docker stop myapp || true &&
-            docker rm myapp || true &&
-            docker build -t myapp . &&
+          ssh -o StrictHostKeyChecking=no ubuntu@16.171.250.50 << 'EOF'
+            cd ~/project
+            git pull
+            docker stop myapp || true
+            docker rm myapp || true
+            docker build -t myapp .
             docker run -d -p 5000:5000 --name myapp myapp
-          "
+          EOF
