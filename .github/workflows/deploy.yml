@@ -20,7 +20,7 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@16.171.250.50 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ubuntu@16.170.211.235 << 'EOF'
             cd ~/project
             git pull
             docker stop myapp || true
